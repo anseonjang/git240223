@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이름-에쿠스 돌리기</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./css/car.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            for (let i = 1; i <= 60; i++) {
+                $('#vr').append('<img src="./equus/eq' + i + '.jpg" width="800" height="415" alt="자동차돌리기">');
+            }
+            $('#vr>img').hide(); // 전체이미지 60종 가려줌
+            $('#vr>img:first-child').show(); // 첫번째이미지만 보여줌
+
+            let index = 0; // 이미지 인덱스 변수 
+            let timer; // 타이머 변수 선언
+
+            // 다음으로 이동하는 함수 
+            function nextImg() {
+                index++;
+                // 이미지가 59를 초과하면 0으로 되돌림
+                if (index > 59) {
+                    index = 0;
+                }
+                // :visible 현재 보이는 요소 
+                $('#vr>img:visible').hide(); // 현재 보이는 요소 가려줌
+                $('#vr>img:eq(' + index + ')').show();
+                // 변수로 지정된 요소들을 보여주도록 함
+            }
+
+            // 이전으로 이동하는 함수 
+            function prevImg() {
+                index--;
+                // 이미지가 0보다 작으면 59로 되돌림
+                if (index < 0) {
+                    index = 59;
+                }
+                // :visible 현재 보이는 요소 
+                $('#vr>img:visible').hide(); // 현재 보이는 요소 가려줌
+                $('#vr>img:eq('+ index +')').show();
+                // 변수로 지정된 요소들을 보여주도록 함
+            }
+
+            // 오른쪽 버튼(next) 누를경우 이동, 떼었을때 중지
+            $(".right").mousedown(function () {
+                timer = setInterval(nextImg, 50);
+                //50ms마다 함수 호출하여 이미지 변경                
+            }).mouseup(function () {
+                clearInterval(timer); // 마우스 뗀 경우 중단
+            });
+           
+            // 왼쪽 버튼(next) 누를경우 이동, 떼었을때 중지
+            $(".left").mousedown(function () {
+                timer = setInterval(prevImg, 50);
+                //50ms마다 함수 호출하여 이미지 변경                
+            }).mouseup(function () {
+                clearInterval(timer); // 마우스 뗀 경우 중단
+            });
+
+
+            // range 값이 변경될 때 이미지를 해당 인덱스로 변경
+            $('#range-input').on('input', function () {
+                let currentValue = $(this).val(); 
+                index = currentValue - 1; // range 값은 1부터 시작하므로 1을 빼줍니다.
+                $('#vr>img:visible').hide(); // 현재 보이는 요소 가려줌
+                $('#vr>img:eq('+ index +')').show();
+            });
+        });
+        /*
+        .val()은 jQuery에서 사용되는 메서드로,
+         해당 요소의 값을 가져오거나 설정하는 데 사용됩니다.
+
+여기서 $(this)는 현재 이벤트가 발생한 요소를 가리키며,
+ val() 메서드를 호출하여 해당 요소의 값, 
+즉 입력 요소의 현재 값을 가져옵니다.
+
+예를 들어, <input type="text"> 요소의 경우 
+.val()을 호출하면 해당 입력 필드에 입력된 텍스트 값을 반환하고, 
+.val('new value')와 같이 인자를 전달하여 값을 설정할 수도 있습니다.
+
+위의 코드에서는 $('#range-input') 즉, ID가 'range-input'인 요소의 값, 즉 슬라이더의 현재 값을 가져와서 currentValue 변수에 할당하고 있습니다.*/
+
+    </script>
+</head>
+
+<body>
+    <!-- #wrap>#vr+.btn>a.left>i.material-icons{&#XE5E0;} -->
+    <div id="wrap">
+        <!-- 에쿠스 60페이지 동적으로 추가 -->
+        <div id="vr"></div>
+        <!-- slider -->
+        <div class="slider">
+            <label for="range-input">이미지 회전:</label>
+            <input type="range" id="range-input" min="1" max="60" value="0">
+        </div>
+       
+
+
+        <!-- 좌우화살표버튼 -->
+        <div class="btn">
+            <a href="#" class="left">
+                <i class="material-icons">&#XE5E0;</i>
+            </a>
+            <a href="#" class="right">
+                <i class="material-icons">&#XE5E1;</i>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

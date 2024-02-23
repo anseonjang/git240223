@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이름-에쿠스 돌리기</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./css/car.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            for (let i = 1; i <= 60; i++) {
+                $('#vr').append('<img src="./equus/eq' + i + '.jpg" width="800" height="415" alt="자동차돌리기">');
+            }
+            $('#vr>img').hide(); // 전체이미지 60종 가려줌
+            $('#vr>img:first-child').show(); // 첫번째이미지만 보여줌
+
+            let index = 0; // 이미지 인덱스 변수 
+            let timer; // 타이머 변수 선언
+
+            // 다음으로 이동하는 함수 
+            function nextImg() {
+                index++;
+                // 이미지가 59를 초과하면 0으로 되돌림
+                if (index > 59) {
+                    index = 0;
+                }
+                // :visible 현재 보이는 요소 
+                $('#vr>img:visible').hide(); // 현재 보이는 요소 가려줌
+                $('#vr>img:eq(' + index + ')').show();
+                // 변수로 지정된 요소들을 보여주도록 함
+            }
+
+            // 이전으로 이동하는 함수 
+            function prevImg() {
+                index--;
+                // 이미지가 0보다 작으면 59로 되돌림
+                if (index < 0) {
+                    index = 59;
+                }
+                // :visible 현재 보이는 요소 
+                $('#vr>img:visible').hide(); // 현재 보이는 요소 가려줌
+                $('#vr>img:eq('+ index +')').show();
+                // 변수로 지정된 요소들을 보여주도록 함
+            }
+
+            // 오른쪽 버튼(next) 누를경우 이동, 떼었을때 중지
+            $(".right").mousedown(function () {
+                timer = setInterval(nextImg, 50);
+                //50ms마다 함수 호출하여 이미지 변경                
+            }).mouseup(function () {
+                clearInterval(timer); // 마우스 뗀 경우 중단
+            });
+           
+            // 왼쪽 버튼(next) 누를경우 이동, 떼었을때 중지
+            $(".left").mousedown(function () {
+                timer = setInterval(prevImg, 50);
+                //50ms마다 함수 호출하여 이미지 변경                
+            }).mouseup(function () {
+                clearInterval(timer); // 마우스 뗀 경우 중단
+            });
+
+
+            // mousedown()메서드 - 버튼 눌렀을때 지정된 함수 실행
+            // mouseup()메서드 - 버튼을 떼었을때 지정된 함수 실행
+
+
+        });
+        // .append() : 새로운 html 요소 추가
+    </script>
+</head>
+
+<body>
+    <!-- #wrap>#vr+.btn>a.left>i.material-icons{&#XE5E0;} -->
+    <div id="wrap">
+        <!-- 에쿠스 60페이지 동적으로 추가 -->
+        <div id="vr"></div>
+        <!-- 좌우화살표버튼 -->
+        <div class="btn">
+            <a href="#" class="left">
+                <i class="material-icons">&#XE5E0;</i>
+            </a>
+            <a href="#" class="right">
+                <i class="material-icons">&#XE5E1;</i>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

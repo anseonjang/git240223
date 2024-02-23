@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+body {
+    background-color: #fcfcfc;
+}
+
+
+#wrap #vr {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    margin: 70px auto;
+}
+
+#wrap .btn {
+    margin-top: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#wrap .btn a {
+    color: #ddd;
+    text-decoration: none;
+}
+#wrap .btn a .material-icons {
+    font-size: 70px;
+}

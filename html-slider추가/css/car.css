@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+body {
+    background-color: #fcfcfc;
+}
+
+#wrap {
+    width: 1200px;
+    margin: 0 auto;
+    /* border:1px solid red; */
+}
+
+#wrap #vr {
+    position: relative;
+    width: 800px;
+    height: 415px;
+    margin: 70px auto;
+}
+/* slider */
+#wrap .slider {
+    margin-top: -50px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#wrap .btn {
+    margin-top: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#wrap .btn a {
+    color: #ddd;
+    text-decoration: none;
+}
+#wrap .btn a .material-icons {
+    font-size: 70px;
+}
